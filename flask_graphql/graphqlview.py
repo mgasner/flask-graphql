@@ -22,6 +22,7 @@ class GraphQLView(View):
     graphiql_html_title = None
     middleware = None
     batch = False
+    allow_subscriptions = False
 
     methods = ['GET', 'POST', 'PUT', 'DELETE']
 
@@ -81,6 +82,7 @@ class GraphQLView(View):
                 context_value=self.get_context(),
                 middleware=self.get_middleware(),
                 executor=self.get_executor(),
+                allow_subscriptions=self.allow_subscriptions,
             )
             result, status_code = encode_execution_results(
                 execution_results,
